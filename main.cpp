@@ -1,15 +1,5 @@
 #include <iostream>
-#include <random>
 #include <vector>
-
-std::random_device dev;
-std::mt19937 rng(dev());
-
-int random_number(int min = 1, int max = 100)
-{
-    std::uniform_int_distribution<std::mt19937::result_type> distribution(min, max);
-    return distribution(rng);
-}
 
 void max_heapify(std::vector<int>& vector, size_t i, size_t heap_size)
 {
@@ -45,39 +35,9 @@ void heapsort(std::vector<int>& vector)
     }
 }
 
-std::vector<int> generate_vector()
-{
-    size_t size = random_number(5, 10);
-    std::vector<int> vector;
-    vector.reserve(size);
-
-    for (int i = 0; i < size; i++)
-        vector.push_back(random_number());
-    return vector;
-}
-
-bool is_sorted(const std::vector<int>& vector)
-{
-    for (auto i = 0; i < vector.size() - 1; i++)
-    {
-        if (vector[i] > vector[i + 1])
-            return false;
-    }
-    return true;
-}
-
 int main()
 {
-    for (int i = 0; i < 10000; i++)
-    {
-        auto vector = generate_vector();
-        heapsort(vector);
-        bool sorted = is_sorted(vector);
-        if (!sorted) {
-            std::cout << "Not sorted!\n";
-            return 1;
-        }
-    }
-    std::cout << "All vectors were sorted (Yay!)\n";
+    std::vector<int> vector = {10, 2, 20, 5, 7, 10, 33, 100};
+    heapsort(vector);
     return 0;
 }
